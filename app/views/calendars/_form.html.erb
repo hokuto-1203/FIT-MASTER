@@ -1,0 +1,77 @@
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_for @calendar do |f| %>
+         <div class="form-group">
+            <label class="control-label" for="">コーディネート</label>
+            <%= f.hidden_field :c_date, value: @calendar.c_date %>
+            <%= f.hidden_field :user_id, value: @calendar.user_id %>
+         </div>
+
+         <div class="form-group">
+           <select name="calendar[top_item_demo]" id="calendar_top_item_demo">
+              <% @top_items.each do |top| %>
+                  <option value="<%= top.id %>" data-imgsrc="<%= top.image.url %>" data-description="<%= top.description %>"><%= top.description %></option>
+              <% end %>
+           </select>
+         </div>
+
+         <div class="form-group">
+           <select name="calendar[bottom_item_demo]" id="calendar_bottom_item_demo">
+              <% @bottom_items.each do |bottom| %>
+                  <option value="<%= bottom.id %>" data-imgsrc="<%= bottom.image.url %>" data-description="<%= bottom.description %>"><%= bottom.description %></option>
+              <% end %>
+           </select>
+         </div>
+
+        <div class="form-group">
+           <select name="calendar[shoes_item_demo]" id="calendar_shoes_item_demo">
+              <% @shoes_items.each do |shoes| %>
+                  <option value="<%= shoes.id %>" data-imgsrc="<%= shoes.image.url %>" data-description="<%= shoes.description %>"><%= shoes.description %></option>
+              <% end %>
+           </select>
+         </div>
+        
+        <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_area :description, class: 'form-control' %>
+        </div>
+
+        <input class="calendar_top_item" type="hidden" name="calendar[top_item]" id="calendar_top_item" kl_vkbd_parsed="true">
+        <input class="calendar_bottom_item" type="hidden" name="calendar[bottom_item]" id="calendar_bottom_item" kl_vkbd_parsed="true">
+        <input class="calendar_shoes_item" type="hidden" name="calendar[shoes_item]" id="calendar_shoes_item" kl_vkbd_parsed="true">
+
+        <% if logged_in? %>
+          <%= f.submit '投稿', class:'btn btn-black btn-block' %>
+        <% end %>
+        
+      <% end %>
+        
+      </div>
+    </div>
+<script>
+(window.onload = function() {
+
+ var options = {
+   dropdownHeight : "200px",
+   imageLocation : "right",
+   padding   : 20,
+   select   : 0,
+   width   : 300
+ };
+ 
+ $('#calendar_top_item_demo').gorillaDropdown(options);
+ $('#calendar_bottom_item_demo').gorillaDropdown(options);
+ $('#calendar_shoes_item_demo').gorillaDropdown(options);
+ $('#new_calendar').submit(function(){
+   var selected_top = $("#calendar_top_item_demo").gorillaDropdown("selected");
+  //  alert(selected_top.value);
+   $('#calendar_top_item').val(selected_top.value);
+   var selected_bottom = $("#calendar_bottom_item_demo").gorillaDropdown("selected");
+   $('#calendar_bottom_item').val(selected_bottom.value);
+   var selected_shoes = $("#calendar_shoes_item_demo").gorillaDropdown("selected");
+   $('#calendar_shoes_item').val(selected_shoes.value);
+   return true;
+ });
+})();
+</script>

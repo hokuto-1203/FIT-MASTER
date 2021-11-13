@@ -1,0 +1,54 @@
+
+.container {
+	
+	position: relative;
+	
+	> .current {
+		
+		position: relative;
+		
+		box-sizing: border-box;
+		
+		width: 100%;
+		
+		border-style: solid;
+		
+	}
+	
+	
+	
+	> .ddlist {
+		
+		position: absolute;
+		
+		display: none;
+		z-index: 100;
+		
+		
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		
+		overflow: auto;
+		
+		
+		> .dditem {
+			
+			width: 100%;
+			
+			list-style-type: none;
+			
+			box-sizing: border-box;
+			
+			border-style: solid;
+			border-top: none;
+			
+		}
+		
+	}
+}
+
+
+.-clear-both {
+	clear: both;
+}

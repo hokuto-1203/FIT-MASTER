@@ -1,0 +1,45 @@
+<div class="top-calendar-wrapper text-center">
+  <div class="container top-hero-container">
+    <div class="row">
+     
+        <h1 class="text-center text-white">Calendar</h1>
+           <%= link_to 'アイテム一覧',items_path, class: 'btn btn-block btn-white' %>
+          
+          <table class="table table-dark text-white" border="1">
+            <thead>
+                <tr>
+                    <% t('date.abbr_day_names').each do |day_name| %> 　
+                      <td>
+                        <p><%= day_name %></p>
+                      </td>
+                    <% end %>
+                </tr>
+            </thead>
+            <tbody>
+                <% @calendar_data.each do |date| %>
+                        <% if date.wday == 0 %>
+                         <tr>
+                        <% end %>
+                            <td>
+                            <%# <%= link_to "登録",new_calendar_path(c_date: date.day) %>
+                            <% calendar = Calendar.where(user_id: current_user.id).where(c_date: date).first %>
+                            <p><%= date.day %></p>
+                            <% if calendar.blank? %>
+                              <%= link_to "登録", new_calendar_path(c_date: date) %>
+                            <% else %>
+                              <%= link_to "詳細", calendar_path(id: calendar.id), method: :get %>
+                            <% end %>
+                            </td>
+                        <% if date.wday == 6 %>
+                         </tr>
+                        <% end %>
+                <% end %>
+            </tbody>
+          </table>
+            <p class="text-white"><%= @today.strftime("< %m / %Y >") %></p>
+            <%= beforeMonth = @today << 1 %>
+            <%= afterMonth = @today >> 1 %>
+      </div>
+    </div>
+  </div>
+</div>

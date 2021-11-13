@@ -1,0 +1,24 @@
+<div class="container">
+<h1>投稿詳細</h1>
+<table class="table">
+   <tr>
+     <th>日付</th>
+     <th>tops</th>
+     <th>bottoms</th>
+     <th>shoes</th>
+     <th>メモ</th>
+   </tr>
+   <tr>
+     <td><%= @calendar.c_date %></td>
+     <% top_item = Item.find(@calendar.top_item) %>
+     <td><%= image_tag top_item.image.url %></td>
+     <% bottom_item = Item.find(@calendar.bottom_item) %>
+     <td><%= image_tag bottom_item.image.url %></td>
+     <% shoes_item = Item.find(@calendar.shoes_item) %>
+     <td><%= image_tag shoes_item.image.url %></td>
+     <td><%= @calendar.description %></td>
+   </tr>
+</table>
+<%= link_to "編集", edit_calendar_path(id: @calendar.id), method: :get %>
+<%= link_to "削除", calendar_path(id: @calendar.id), method: :delete, data: {confirm: "本当に削除しますか"} %>
+</div>

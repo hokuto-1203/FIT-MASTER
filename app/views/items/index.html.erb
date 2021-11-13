@@ -1,0 +1,43 @@
+<div class="item-index-wrapper text-center">
+  <div class="container top-hero-container">
+    <h1 class="text-white">アイテム一覧</h1>
+    <%= link_to '※新規アイテム登録', new_item_path, class: 'text-white text-center' %>
+    <div class= "row">
+    <table border="1">
+        <thead>
+            <tr>
+                <div class= "col-md-3 col-md-offset-1">
+                 <th>アイテム名</th>
+                </div>
+                <div class= "clo-md-3">
+                 <th class= 'text-center'>image</th>
+                </div>
+                <div class= "clo-md-3">
+                <th>コメント</th>
+                </div>
+            </tr>
+        </thead>
+        <tbody>
+        <% @items.each do |item| %>
+            <tr>
+            <% if item.choice == 1 %>
+              <td>top</td>
+            <% elsif item.choice == 2 %>
+              <td>bottom</td>
+            <% else %>
+              <td>shoes</td>
+            <% end %>
+            <td><%= image_tag item.image.url, class: 'sized' %></td>
+            <td><%= item.description %></td>
+            <td>
+            <%= link_to "編集", edit_item_path(item.id) %>
+            <%= link_to "削除する", item_path(item.id), method: :delete, data: {confirm: "本当に削除しますか"} %>
+            </td>
+            </tr>
+        <% end %>
+        </tbody>
+      
+    </table>  
+    </div>
+  </div>
+</div>
